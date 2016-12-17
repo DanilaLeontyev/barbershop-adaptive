@@ -1,0 +1,170 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+    <link rel="stylesheet" href="css/normalize.css">
+    <link rel="stylesheet" href="css/main.css">
+</head>
+<body>
+   <header class="page-header">
+       <h1 class="visually-hidden">Барбершоп "Бородинский" - истинно мужская классика</h1>
+       <div class="page-header__logo">
+           <img src="img/logotype-desktop.svg" alt="Барбершоп &#8220;Бородинский&#8221;" width="370" height="153">
+       </div>
+       <nav class="main-nav  main-nav--closed  main-nav--nojs">
+           <button class="main-nav__toggle" type="button">Открыть меню</button>
+           <div class="main-nav__wrapper">
+               <ul class="main-nav__items">
+                   <li class="main-nav__item  main-nav__item--active"><a>Главная</a></li>
+                   <li class="main-nav__item"><a href="#">Наши работы</a></li>
+                   ............
+               </ul>
+               <ul class="main-nav__user-items">
+                   <li class="main-nav__user-item"><a href="#" title="Войти" class="main-nav__user-login">Вход</a></li>
+               </ul>
+           </div>
+       </nav>
+   </header>
+   
+   <section class="stats">
+       <header class="stats-header">
+           <h2 class="stats__title  visually-hidden">Статистика Барбершопа</h2>
+           <b class="stats__slogan">Стрижка у нас<br> это выгодно!</b>
+           <p class="stats__intro">Мужская стрижка требует точного подхода. Обратимся к статистике:</p>
+           <small class="stats__legend  stats__legend--top"><sup>*</sup>- приведенные данные ложь</small>
+       </header>
+       <table class="stats__items">
+           <tr>
+               <td class="stats__value">1500 <sup>*</sup></td>
+               <td class="stats__field">рублей<br> Lorem ipsuLorem ipsum dolor.</td>
+           </tr>
+           <tr>
+               <td class="stats__value">1500 <sup>*</sup></td>
+               <td class="stats__field">рублей<br> Lorem ipsuLorem ipsum dolor.</td>
+           </tr>
+           <tr>
+               <td class="stats__value">1500 <sup>*</sup></td>
+               <td class="stats__field">рублей<br> Lorem ipsuLorem ipsum dolor.</td>
+           </tr>
+           <tr>
+               <td class="stats__value">1500 <sup>*</sup></td>
+               <td class="stats__field">рублей<br> Lorem ipsuLorem ipsum dolor.</td>
+           </tr>
+       </table>
+        <small class="stats__legend  stats__legend--bottom"><sup>*</sup>- приведенные данные ложь</small>
+   </section>
+    
+    <section class="advanteges">
+        <div class="advanteges__wrapper  slider">
+            <h2 class="advanteges__title  visually-hidden">Наши преимущества</h2>
+            <input type="radio" class="slider__input" name="advanteges" id="advanteges-input-1" checked>
+            <input type="radio" class="slider__input" name="advanteges" id="advanteges-input-2">
+            <input type="radio" class="slider__input" name="advanteges" id="advanteges-input-3">
+            <ul class="advantages__items">
+                <li class="advantages__item  advantages__item--fast  slider__item">
+                    <h3 class="advatages__item-title">Быстро</h3>
+                    <p>Мы делаем свою работу быстро! Два часа пролетят незаметно и вы - счастливый обладатель стильной прически</p>
+                </li>
+                <li class="advantages__item  advantages__item--fast  slider__item">
+                    <h3 class="advatages__item-title">Быстро</h3>
+                    <p>Мы делаем свою работу быстро! Два часа пролетят незаметно и вы - счастливый обладатель стильной прически</p>
+                </li>
+                <li class="advantages__item  advantages__item--fast  slider__item">
+                    <h3 class="advatages__item-title">Быстро</h3>
+                    <p>Мы делаем свою работу быстро! Два часа пролетят незаметно и вы - счастливый обладатель стильной прически</p>
+                </li>
+                
+            </ul>
+            <div class="advantages__toggles  slider__toggles">
+                <label for="advantages-input-1" class="slider__toggle">1</label>
+                <label for="advantages-input-2" class="slider__toggle">2</label>
+                <label for="advantages-input-3" class="slider__toggle">3</label>
+            </div>
+        </div>
+    </section>
+    
+    <section class="news">
+        <div class="news__wrapper">
+            <h2 class="new__title">Новости и акции</h2>
+            <ul class="news__items">
+                <li class="news__item">
+                    <time class="news__date" datetime="2016-09-00"><b>29</b> сент</time>
+                    <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                </li>
+                <li class="news__item">
+                    <time class="news__date" datetime="2016-09-00"><b>29</b> сент</time>
+                    <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                </li>
+                <li class="news__item">
+                    <time class="news__date" datetime="2016-09-00"><b>29</b> сент</time>
+                    <p>Lorem ipsum dolor sit amet, consectetur.</p>
+                </li>
+            </ul>
+            <a href="#" class="news__to--all btn">Показать все</a>
+        </div>
+    </section>
+    
+    <section class="reviews">
+        <div class="reviews__wrapper  slider">
+            <h2 class="reviews__title">Отзывы о нас</h2>
+            <a href="#" class="reviews__write  btn">Оставить свой</a>
+            <input type="radio" name="reviews" class="slider__input" id="reviews-input-1" checked>
+            <input type="radio" name="reviews" class="slider__input" id="reviews-input-2"> 
+            <input type="radio" name="reviews" class="slider__input" id="reviews-input-3"> 
+            <div class="reviews__items">
+                <blockquote class="reviews__item  slider__item">
+                    <div class="reviews__author-foto">
+                        <img src="img/foto.jpg" alt="Фото Трэвиса Баркера" width="50" height="33"> 
+                    </div>
+                    <cite class="reviews__author-name">Трэвис Баркер</cite>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </blockquote>
+                <blockquote class="reviews__item  slider__item">
+                    <div class="reviews__author-foto">
+                        <img src="img/foto.jpg" alt="Фото Трэвиса Баркера" width="50" height="33"> 
+                    </div>
+                    <cite class="reviews__author-name">Трэвис Баркер</cite>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </blockquote>
+                <blockquote class="reviews__item  slider__item">
+                    <div class="reviews__author-foto">
+                        <img src="img/foto.jpg" alt="Фото Трэвиса Баркера" width="50" height="33"> 
+                    </div>
+                    <cite class="reviews__author-name">Трэвис Баркер</cite>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipisicing elit.</p>
+                </blockquote>
+                <button class="review__prev" type="button">Предыдущий отзыв</button>
+                <button class="review__next" type="button">Следующий отзыв</button>
+            </div>
+            
+            <div class="reviews__toggles  slider__toggles">
+                <label for="review-input-1" class="slider__toggle">1</label>
+                <label for="review-input-2" class="slider__toggle">2</label>
+                <label for="review-input-3" class="slider__toggle">3</label> 
+            </div>
+        </div>
+    </section>
+    
+    <footer class="page-footer">
+        <div class="page-footer__wrapper">
+            <p class="page-footer__contacts">
+                <b>Барбершоп "Бородинский"</b><br>
+                г. Санкт-Петербург, ул. Большая Конюшенная 19/8 <br>
+                <a href="tel:+712342342342"><span class="page-footer__contacts-hidden">Тел.:</span>+7 (912) 123-45-67</a>
+            </p>
+            <p class="page-footer__social">
+                <span class="social-links">
+                    <a href="vk.com" class="social-link  social-link--vk">Мы в Вконтакте</a>
+                    <a href="facebook.com" class="social-link  social-link--fb">Мы в Фейсбуке</a>
+                    <a href="instagramm.com" class="social-link  social-link--in">Мы в Инстаграмме</a>
+                </span>
+            </p>
+            <p class="page-footer__copyright">
+                Разработано:
+                <a href="#" class="btn  page-footer__copyright">HTML Academy</a>
+            </p>
+        </div>
+    </footer>
+</body>
+</html>
