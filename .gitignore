@@ -19,6 +19,7 @@
 *.rar
 *.tar
 *.zip
+*.psd
 
 # Logs and databases #
 ######################
@@ -38,3 +39,4 @@ Thumbs.db
 
 # ignore node/grunt dependency directories
 node_modules/
+
