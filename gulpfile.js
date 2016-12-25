@@ -1,105 +1,138 @@
-// []- таск который совершается до запуска таска, в котором это прописано
+'use strict';
 
-var 
-	gulp 		= require("gulp"), 			// Подключаем gulp
-	sass 		= require("gulp-sass"), 	// Подключаем SASS
-	browserSync = require("browser-sync"),  // Подключаем browserSync (live reload for gulp)
-	concat		= require("gulp-concat"),	// конкатенация файлов
-	uglify		= require("gulp-uglifyjs"),	// Минификация JS 
-	cssnano		= require("gulp-cssnano"),	// Минификация CSS
-	rename		= require("gulp-rename"),	// Переименование
-	del			= require("del"),			// Удаление
-	imagemin	= require('gulp-imagemin'),   	// Подключаем библиотеку для работы с изображениями
-	pngquant	= require('imagemin-pngquant'),	// Подключаем библиотеку для работы с png
-	cache       = require('gulp-cache'),		// Подключаем библиотеку кеширования
-	autoprefixer= require('gulp-autoprefixer')	// Автопрефиксер
-;     
+var gulp = require('gulp'),
+    watch = require('gulp-watch'),
+    prefixer = require('gulp-autoprefixer'),
+    uglify = require('gulp-uglify'),
+    sass = require('gulp-sass'),
+    sourcemaps = require('gulp-sourcemaps'),
+    rigger = require('gulp-rigger'),
+    cssmin = require('gulp-minify-css'),
+    imagemin = require('gulp-imagemin'),
+    pngquant = require('imagemin-pngquant'),
+    rimraf = require('rimraf'),
+    browserSync = require("browser-sync"),
+    reload = browserSync.reload;
 
+var path = {
+    build: {
+        html: 'build/',
+        js: 'build/js/',
+        css: 'build/css/',
+        img: 'build/img/',
+        fonts: 'build/fonts/'
+    },
+    src: {
+        html: 'src/*.html',
+        js: 'src/js/main.js',
+        style: 'src/style/main.scss',
+        img: 'src/img/**/*.*',
+        fonts: 'src/fonts/**/*.*'
+    },
+    watch: {
+        html: 'src/**/*.html',
+        js: 'src/js/**/*.js',
+        style: 'src/style/**/*.scss',
+        img: 'src/img/**/*.*',
+        fonts: 'src/fonts/**/*.*'
+    },
+    clean: './build'
+};
 
-gulp.task("sass", function() {					// Таск на создание CSS файла
-	return gulp.src("src/sass/main.scss")		// Берем файл main.scss
-	.pipe(sass())								// Преобразуем из sass в css
-	.pipe(autoprefixer(["last 15 versions", "> 1%", "ie 7", "ie 8" ], {cascade: true}))	// Автопрефиксер
-	.pipe(gulp.dest("src/css"))					// Вывод файла в src/css
-	.pipe(browserSync.reload({stream: true}))	// Вводим css  в browserSync
+var config = {
+    server: {
+        baseDir: "./build"
+    },
+    tunnel: true,
+    host: 'localhost',
+    port: 9000,
+    logPrefix: "Frontend_Devil"
+};
+
+gulp.task('webserver', function () {
+    browserSync(config);
 });
 
-/*
-gulp.task("csslibs", ["sass"], function(){			// Импорт css библиотек
-	return gulp.src("src/sass/libs.scss")	// Берем все файлы из библиотеки 
-	.pipe(cssnano())						// Сжимаем
-	.pipe(rename({							// Переименовывыем
-		suffix:".min"						// Добавляется суффикс .min
-	}))
-	.pipe(gulp.dest("src/css"));			// Выгружаем в папку css
-});
-*/
-
-gulp.task("scripts", function(){								// Минимфикация файлов
-	return gulp.src([											// Берем массив файлов
-		"src/libs/jquery/dist/jquery.min.js",					
-		"src/libs/magnific-popup/dist/magnific-popup.min.js",	// Библиотека для создания попапов (всего всплывающего по нажатию)
-	])
-	.pipe(concat("libs.min.js"))								// Конкатенируем все файлы
-	.pipe(uglify())												// Минифицируем все файлы
-	.pipe(gulp.dest("src/js"))									// Выгружаем в src/js
+gulp.task('clean', function (cb) {
+    rimraf(path.clean, cb);
 });
 
+gulp.task('html:build', function () {
+    gulp.src(path.src.html) 
+        .pipe(rigger())
+        .pipe(gulp.dest(path.build.html))
+        .pipe(reload({stream: true}));
+});
 
-gulp.task("browser-sync", function(){				// Инициализация browserSync
-	browserSync({									// Выполняем browserSync
-		server: {									// Параметры сервера
-			baseDir: "src"							// Директория для сервера - src
-		},
-		notify: false								// Отключение уведомлений
-	});
+gulp.task('js:build', function () {
+    gulp.src(path.src.js) 
+        .pipe(rigger()) 
+        .pipe(sourcemaps.init()) 
+        .pipe(uglify()) 
+        .pipe(sourcemaps.write()) 
+        .pipe(gulp.dest(path.build.js))
+        .pipe(reload({stream: true}));
+});
+
+gulp.task('style:build', function () {
+    gulp.src(path.src.style) 
+        .pipe(sourcemaps.init())
+        .pipe(sass({
+            includePaths: ['src/style/'],
+            outputStyle: 'compressed',
+            sourceMap: false,
+            errLogToConsole: true
+        }))
+        .pipe(prefixer())
+        .pipe(cssmin())
+        .pipe(sourcemaps.write())
+        .pipe(gulp.dest(path.build.css))
+        .pipe(reload({stream: true}));
+});
+
+gulp.task('image:build', function () {
+    gulp.src(path.src.img) 
+        .pipe(imagemin({
+            progressive: true,
+            svgoPlugins: [{removeViewBox: false}],
+            use: [pngquant()],
+            interlaced: true
+        }))
+        .pipe(gulp.dest(path.build.img))
+        .pipe(reload({stream: true}));
+});
+
+gulp.task('fonts:build', function() {
+    gulp.src(path.src.fonts)
+        .pipe(gulp.dest(path.build.fonts))
+});
+
+gulp.task('build', [
+    'html:build',
+    'js:build',
+    'style:build',
+    'fonts:build',
+    'image:build'
+]);
+
+
+gulp.task('watch', function(){
+    watch([path.watch.html], function(event, cb) {
+        gulp.start('html:build');
+    });
+    watch([path.watch.style], function(event, cb) {
+        gulp.start('style:build');
+    });
+    watch([path.watch.js], function(event, cb) {
+        gulp.start('js:build');
+    });
+    watch([path.watch.img], function(event, cb) {
+        gulp.start('image:build');
+    });
+    watch([path.watch.fonts], function(event, cb) {
+        gulp.start('fonts:build');
+    });
 });
 
 
-gulp.task("clean", function(){						// Удаление папки dist
-	return del.sync("dist");
-});
-
-gulp.task("clearCache", function(){						// Очистка кэша
-	return cache.clearAll();
-});
-
-
-gulp.task("img", function(){						//Сжатие загружаемых изображений
-	return gulp.src('src/img/**/*.{png,jpg,gif}')   // Берем все изображения из src
-	.pipe(cache(imagemin({                      // Сжимаем их с наилучшими настройками с учетом кеширования
-		interlaced: true,
-		optimizationlevel: 3,
-		progressive: true,
-		svgoPlugins: [{removeViewBox: false}],
-		use: [pngquant()]
-	})))
-	.pipe(gulp.dest("dist/img"));
-	
-});
-
-gulp.task("watch", ["browser-sync", "sass", "scripts"], function(){		// Создание таска для слежения за файлами
-	gulp.watch("src/sass/**/*.scss", ["sass"]);							// Следим за Sass файлами в папке sass
-	gulp.watch("src/*.html", browserSync.reload);						// Слежение за html		
-	gulp.watch("src/js/**/*.js", browserSync.reload);					// Слежение за JS	
-});
-
-/*
-
-	Для продакшена
-
-*/
-
-gulp.task("build", ["clean", "sass", "img", "scripts"], function(){		// 
-	var buildCss = gulp.src("src/css/*.css")
-	.pipe(gulp.dest("dist/css"));					// Все CSS файлы в продакшен
-	
-	var buildFont = gulp.src("src/fonts/**/*")
-	.pipe(gulp.dest("dist/fonts"));					// Все шрифты файлы в продакшен
-	
-	var buildJs = gulp.src("src/js/**/*.js")
-	.pipe(gulp.dest("dist/js"));					// Все JS файлы в продакшен
-	
-	var buildHTML = gulp.src("src/*.html")
-	.pipe(gulp.dest("dist"));						// Все файлы HTML в продакшен
-});
+gulp.task('default', ['build', 'webserver', 'watch']);
