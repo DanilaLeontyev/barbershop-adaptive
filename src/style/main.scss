@@ -1,10 +1,25 @@
 /*
 * Third Party
 */
-//@import "../../bower_components/normalize.css/normalize.css";
+@import "partials/normalize.css";
 
 
 /*
 * Custom
 */
-@import "partials/variable";
+@import "partials/variable.scss";
+@import "partials/scaffolding.scss";
+@import "partials/mixins.scss";
+
+
+
+@import "blocks/page-header.scss";
+@import "blocks/main-nav.scss";
+@import "blocks/stats.scss";
+@import "blocks/advanteges.scss";
+@import "blocks/news.scss";
+
+
+.visually-hidden {
+	display: none;
+}

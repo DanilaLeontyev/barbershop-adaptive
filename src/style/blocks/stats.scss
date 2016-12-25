@@ -1,0 +1,58 @@
+.stats {
+	@include container();
+}
+.stats__header {
+	padding-top: 27px;
+	padding-right: 38px;
+	padding-bottom: 26px;
+	padding-left: 38px;
+}
+
+.stats__items {
+	width: 100%;
+	
+}
+
+@media ($tablet-widths) {
+	.stats {
+		position: relative;
+		z-index: 1;
+		
+		margin-top: -184px;
+	}
+	
+	.stats__header {
+		@include clearfix();
+		
+		padding: 0;
+		padding-top: 31px;
+		padding-bottom: 24px;
+	}
+	
+	.stats__items {
+		@include clearfix();
+		
+		display: block;
+	}
+}
+
+@media ($desktop-widths) {
+	.stats {
+		@include clearfix();
+		
+		margin-top: -159px;
+	}
+	
+	.stats__header {
+		float: left;
+		width: 240px;
+		padding-left: 40px;
+		padding-right: 40px;
+	}
+	
+	.stats__items {
+		float: right;
+		display: block;
+		width: 640px;
+	}
+}
