@@ -7,4 +7,4 @@
     Custom
  */
 
-//= partials/helper.js
+//= partials/main-nav-mobile.js

@@ -4,6 +4,14 @@
 
 .page-header__logo {
 	height: 85px;
+	
+	text-align: center;
+}
+
+.page-header__logo img {
+	padding-top: 30px;
+	width: 230px;
+	height: auto;
 }
 
 @media ($tablet-widths) {
@@ -19,6 +27,23 @@
 		
 		width: 100%;
 		height: 400px;
+		
+		background-color: #000;
+		background-image: url(../img/back-tablet.jpg);
+		background-repeat: no-repeat;
+		background-position: center -9px;
+		background-size: cover;
+	}
+	
+	.page-header__logo img {
+		position: absolute;
+		bottom: 257px;
+		left: 50%;
+		
+		width: 370px;
+		height: auto;
+		
+		transform: translateX(-50%);
 	}
 }
 
@@ -29,5 +54,11 @@
 	
 	.page-header__logo {
 		height: 648px;
+		background-position: center 0;
+		background-size: cover;
+	}
+	
+	.page-header__logo img {
+		bottom: 438px;
 	}
 }
