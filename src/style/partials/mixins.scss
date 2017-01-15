@@ -19,6 +19,16 @@
 		width: 960px;
 	}
 }
+
+@mixin container-fluid () {
+	width: auto;
+	@media ($tablet-widths) {
+		width: 84%;
+		max-width: 1200px;
+		margin: 0 auto;
+	}
+}
+
 @mixin no-outline(){
 	outline: none;
 	background: transparent;

@@ -1,9 +1,9 @@
 .main-nav {
 	position: relative;
 	
-	width: 320px;
+	width: auto;
 	min-height: 51px;
-	margin: 0 auto;
+	
 	background-color: #826550;
 }
 
@@ -244,8 +244,10 @@
 	}
 	
 	.main-nav__wrapper {
-		@include container();
-		@include clearfix();
+		@include container-fluid();
+		
+		display: flex;
+		justify-content: space-between;
 	}
 	
 	.main-nav__toggle {
@@ -253,12 +255,12 @@
 	}
 	
 	.main-nav__items {
-		float: left;
-		width: 570px;
+		display: flex;
+		flex-wrap: wrap;
+		flex-grow: 1;
 	}
 	
 	.main-nav__item {
-		float: left;
 		margin-right: 32px;
 		
 		&:last-child {
@@ -304,7 +306,6 @@
 }
 
 	.main-nav__user-items {
-		float: right;
 		width: 60px;
 	}
 	
@@ -333,7 +334,6 @@
 
 @media ($desktop-widths) {
 	.main-nav__items {
-		width: 780px;
 	}
 	
 	.main-nav__item {
